@@ -1,6 +1,8 @@
 from requests import Request, Session
 import json
 import datetime
+from tkinter import *
+from tkinter import ttk
 
 url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
 parameters = {
