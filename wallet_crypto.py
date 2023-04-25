@@ -41,4 +41,14 @@ def refresh(name, symbol, price, percent_change_24h, percent_change_7d):
 if __name__ == "__main__":
   refresh(name, symbol, price, percent_change_24h, percent_change_7d)
   for i in range(len(name)):
-     print(symbol[i], name[i], price[i], 'USD /24h:', percent_change_24h[i], '/7d:', percent_change_7d[i])
+     if percent_change_24h[i] < 0.00:
+        if percent_change_7d[i] < 0.00:
+          print('\033[95m', symbol[i], '\033[0m', price[i], 'USD /24h:', '\033[91m', percent_change_24h[i], '\033[0m', '%', '/7d:', '\033[91m', percent_change_7d[i], '\033[0m', '%')
+        else:
+           print('\033[95m', symbol[i], '\033[0m', price[i], 'USD /24h:', '\033[91m', percent_change_24h[i], '\033[0m', '%', '/7d:', '\033[92m', percent_change_7d[i], '\033[0m', '%')
+     else:
+        if percent_change_7d[i] < 0.00:
+          print('\033[95m', symbol[i], '\033[0m', price[i], 'USD /24h:', '\033[92m', percent_change_24h[i], '\033[0m', '%', '/7d:', '\033[91m', percent_change_7d[i], '\033[0m', '%')
+        else:
+            print('\033[95m', symbol[i], '\033[0m', price[i], 'USD /24h:', '\033[92m', percent_change_24h[i], '\033[0m', '%', '/7d:', '\033[92m', percent_change_7d[i], '\033[0m', '%')
+    
