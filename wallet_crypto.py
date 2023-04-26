@@ -39,7 +39,7 @@ def refresh(name, symbol, price, percent_change_24h, percent_change_7d):
     return name, symbol, price, percent_change_24h, percent_change_7d
 
 if __name__ == "__main__":
-  #API coinmarketcap
+  #Affichage lignes de commande
   refresh(name, symbol, price, percent_change_24h, percent_change_7d)
   for i in range(len(name)):
      if percent_change_24h[i] < 0.00:
@@ -56,7 +56,7 @@ if __name__ == "__main__":
   #Affichage graphique
   root = tk.Tk()
   root.title('Wallet')
-
+  
   for i in range(len(name)):
     tk.Label(root, text=symbol[i], fg='#653FE2').grid(row=i, column=0)
     tk.Label(root, text=price[i]).grid(row=i, column=1)
