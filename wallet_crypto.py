@@ -1,8 +1,6 @@
-from requests import Request, Session
+from requests import Session
 import json
 import datetime
-import tkinter as tk
-from tkinter import Canvas
 
 url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
 parameters = {
@@ -12,20 +10,20 @@ parameters = {
 }
 headers = {
   'Accepts': 'application/json',
-  'X-CMC_PRO_API_KEY': 'YOUR_KEY',
+  'X-CMC_PRO_API_KEY': 'c081e4fd-22a2-44bc-b37d-af50780595ef',
 }
 
+date = str(datetime.datetime.now())
 name = []
 symbol = []
 price = []
 percent_change_24h = []
 percent_change_7d = []
 
-def refresh(name, symbol, price, percent_change_24h, percent_change_7d):
+def refresh(name, symbol, price, percent_change_24h, percent_change_7d, date):
     session = Session()
     session.headers.update(headers)
     response = session.get(url, params=parameters).json()
-    date = str(datetime.datetime.now())
     print('Dernière update:', date[0:10], 'à:', date[11:16], '\n')
 
     for i in range(len(response['data'])):
@@ -40,7 +38,7 @@ def refresh(name, symbol, price, percent_change_24h, percent_change_7d):
 
 if __name__ == "__main__":
   #Affichage lignes de commande
-  refresh(name, symbol, price, percent_change_24h, percent_change_7d)
+  refresh(name, symbol, price, percent_change_24h, percent_change_7d, date)
   for i in range(len(name)):
      if percent_change_24h[i] < 0.00:
         if percent_change_7d[i] < 0.00:
@@ -52,23 +50,6 @@ if __name__ == "__main__":
           print('\033[95m', symbol[i], '\033[0m', price[i], 'USD /24h:', '\033[92m', percent_change_24h[i], '\033[0m', '%', '/7d:', '\033[91m', percent_change_7d[i], '\033[0m', '%')
         else:
             print('\033[95m', symbol[i], '\033[0m', price[i], 'USD /24h:', '\033[92m', percent_change_24h[i], '\033[0m', '%', '/7d:', '\033[92m', percent_change_7d[i], '\033[0m', '%')
-
-  #Affichage graphique
-  root = tk.Tk()
-  root.title('Wallet')
-  
-  for i in range(len(name)):
-    tk.Label(root, text=symbol[i], fg='#653FE2').grid(row=i, column=0)
-    tk.Label(root, text=price[i]).grid(row=i, column=1)
-    if percent_change_24h[i] < 0.00:
-      tk.Label(root, text=percent_change_24h[i], fg='#FF0011').grid(row=i, column=2)
-    else:
-      tk.Label(root, text=percent_change_24h[i], fg='#12B600').grid(row=i, column=2)
-    if percent_change_7d[i] < 0.00:
-      tk.Label(root, text=percent_change_7d[i], fg='#FF0011').grid(row=i, column=3)
-    else:
-      tk.Label(root, text=percent_change_7d[i], fg='#12B600').grid(row=i, column=3)
   
 
-  root.resizable(False, False)
-  root.mainloop()
+ 
