@@ -1,4 +1,4 @@
-<p style="text-align: center;">Visualiser le prix des 40 tokens les plus utilisés sur [CoinMarketCap](https://coinmarketcap.com/)</p>
+Visualiser le prix des 40 tokens les plus utilisés sur [CoinMarketCap](https://coinmarketcap.com/)
 
 ## Librairies
 Installer les modules avec pip:
